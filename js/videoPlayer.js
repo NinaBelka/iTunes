@@ -6,7 +6,9 @@ export const videoPlayerInit = () => {
     videoButtonStop = document.querySelector('.video-button__stop'),
     videoTimePassed = document.querySelector('.video-time__passed'),
     videoProgress = document.querySelector('.video-progress'),
-    videoTimeTotal = document.querySelector('.video-time__total');
+    videoTimeTotal = document.querySelector('.video-time__total'),
+    videoFullscreen = document.querySelector('.video-fullscreen'),
+    videoVolume = document.querySelector('.video-volume');
 
   // Реализация паузы
   const toggleIcon = () => {
@@ -34,7 +36,7 @@ export const videoPlayerInit = () => {
     videoPlayer.currentTime = 0;
   };
 
-  const addZero = n => n < 10 ? '0' + n : n;
+  const addZero = n => n < 10  ? '0' + n : n;
 
   videoPlayer.addEventListener('click', togglePlay);
 
@@ -64,10 +66,23 @@ export const videoPlayerInit = () => {
   });
 
   // Реализация прогресса воспроизведения
-  videoProgress.addEventListener('change', () => {
+  videoProgress.addEventListener('input', () => {
     const duration = videoPlayer.duration;
     const value = videoProgress.value;
     videoPlayer.currentTime = (value * duration) / 100;
   });
+
+  // Видео на весь экран
+  videoFullscreen.addEventListener('click', () => {
+    videoPlayer.requestFullscreen();
+  });
+
+  videoVolume.addEventListener('input', () => {
+    videoPlayer.volume = videoVolume.value / 100;
+  });
+
+  videoPlayer.volume = 0.5;
+  videoVolume.value = videoPlayer.volume * 100;
+
 
 };
