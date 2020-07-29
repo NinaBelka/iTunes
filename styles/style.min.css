@@ -282,6 +282,7 @@ main {
 }
 
 .radio-list {
+  margin-bottom: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -759,6 +760,15 @@ input[type=range]:focus::-ms-fill-upper {
   display: -ms-flexbox;
   display: flex
 }
+
+.radio-icon {
+  margin: 5px;
+}
+
+.radio-volume {
+  max-width: 240px;
+}
+
 
 .red-text {
   color: #F51E38

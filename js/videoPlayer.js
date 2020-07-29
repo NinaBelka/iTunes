@@ -77,6 +77,7 @@ export const videoPlayerInit = () => {
     videoPlayer.requestFullscreen();
   });
 
+  // Реализация громкости
   videoVolume.addEventListener('input', () => {
     videoPlayer.volume = videoVolume.value / 100;
   });
