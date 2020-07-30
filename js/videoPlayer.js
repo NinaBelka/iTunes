@@ -1,3 +1,5 @@
+import { addZero } from './supScript.js';
+
 export const videoPlayerInit = () => {
 
   // Получение элементов со страницы DOM
@@ -8,7 +10,7 @@ export const videoPlayerInit = () => {
     videoProgress = document.querySelector('.video-progress'),
     videoTimeTotal = document.querySelector('.video-time__total'),
     videoFullscreen = document.querySelector('.video-fullscreen'),
-    videoVolume = document.querySelector('.video-volume');
+    volumeProgress = document.querySelector('.volume-progress');
 
   // Реализация паузы
   const toggleIcon = () => {
@@ -36,8 +38,6 @@ export const videoPlayerInit = () => {
     videoPlayer.currentTime = 0;
   };
 
-  const addZero = n => n < 10  ? '0' + n : n;
-
   videoPlayer.addEventListener('click', togglePlay);
 
   videoButtonPlay.addEventListener('click', togglePlay);
@@ -55,14 +55,14 @@ export const videoPlayerInit = () => {
 
     videoProgress.value = (currentTime / duration) * 100;
 
-    let minutePassed = Math.floor(currentTime / 60);
+    let minutesPassed = Math.floor(currentTime / 60);
     let secondsPassed = Math.floor(currentTime % 60);
 
-    let minuteTotal = Math.floor(duration / 60);
+    let minutesTotal = Math.floor(duration / 60);
     let secondsTotal = Math.floor(duration % 60);
 
-    videoTimePassed.textContent = `${addZero(minutePassed)}:${addZero(secondsPassed)}`;
-    videoTimeTotal.textContent = `${addZero(minuteTotal)}:${addZero(secondsTotal)}`;
+    videoTimePassed.textContent = `${addZero(minutesPassed)}:${addZero(secondsPassed)}`;
+    videoTimeTotal.textContent = `${addZero(minutesTotal)}:${addZero(secondsTotal)}`;
   });
 
   // Реализация прогресса воспроизведения
@@ -78,12 +78,11 @@ export const videoPlayerInit = () => {
   });
 
   // Реализация громкости
-  videoVolume.addEventListener('input', () => {
-    videoPlayer.volume = videoVolume.value / 100;
+  volumeProgress.addEventListener('input', () => {
+    videoPlayer.volume = volumeProgress.value / 100;
   });
 
   videoPlayer.volume = 0.5;
-  videoVolume.value = videoPlayer.volume * 100;
-
+  volumeProgress.value = videoPlayer.volume * 100;
 
 };

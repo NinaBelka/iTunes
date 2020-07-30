@@ -1,13 +1,14 @@
 export const radioPlayerInit = () => {
-  console.log('Radio Init');
-
   const radio = document.querySelector('.radio'),
     radioHeaderBig = document.querySelector('.radio-header__big'),
     radioCoverImg = document.querySelector('.radio-cover__img'),
     radioNavigation = document.querySelector('.radio-navigation'),
     radioItem = document.querySelectorAll('.radio-item'),
     radioStop = document.querySelector('.radio-stop'),
-    radioVolume = document.querySelector('.radio-volume');
+    radioVolume = document.querySelector('.radio-volume'),
+    radioMute = document.querySelector('.radio-mute');
+  
+  let prevVolume = 1;
 
   const audio = new Audio();
   audio.type = 'audio/aac';
@@ -66,6 +67,16 @@ export const radioPlayerInit = () => {
   // Реализация громкости
   radioVolume.addEventListener('input', () => {
     audio.volume = radioVolume.value / 100;
+    prevVolume = audio.volume;
+  });
+
+  radioMute.addEventListener('click', () => {
+    if (audio.volume) {
+      prevVolume = audio.volume;
+      audio.volume = 0;
+    } else {
+      audio.volume = prevVolume;
+    }
   });
 
   audio.volume = 0.5;
