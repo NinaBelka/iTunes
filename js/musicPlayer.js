@@ -14,7 +14,7 @@ export const musicPlayerInit = () => {
     audioProgressTiming = document.querySelector('.audio-progress__timing'),
     audioTimePassed = document.querySelector('.audio-time__passed'),
     audioTimeTotal = document.querySelector('.audio-time__total'),
-    volumeProgress = document.querySelector('.volume-progress');
+    volumeProgressAudio = document.querySelector('.volume-progress-audio');
   
   const playList = ['hello', 'flow', 'speed'];
   
@@ -114,11 +114,20 @@ export const musicPlayerInit = () => {
   });
 
   // Реализация громкости
-  volumeProgress.addEventListener('input', () => {
-    audioPlayer.volume = volumeProgress.value / 100;
+  volumeProgressAudio.addEventListener('input', () => {
+    audioPlayer.volume = volumeProgressAudio.value / 100;
   });
 
   audioPlayer.volume = 0.5;
-  volumeProgress.value = audioPlayer.volume * 100;
+  volumeProgressAudio.value = audioPlayer.volume * 100;
+
+  musicPlayerInit.stop = () => {
+    if (!audioPlayer.paused) {
+      audioPlayer.pause();
+      audio.classList.remove('play');
+      audioButtonPlay.classList.remove('fa-pause');
+      audioButtonPlay.classList.add('fa-play');
+    }
+  };
 
 };

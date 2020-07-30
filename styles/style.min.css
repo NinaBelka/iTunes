@@ -678,9 +678,11 @@ input[type=range]:focus::-ms-fill-upper {
 
 .volume-icon {
   margin: 10px;
+  font-size: 20px;
 }
 
-.volume-progress {
+.volume-progress,
+.volume-progress-audio {
   max-width: 100px;
 }
 
